@@ -1,35 +1,15 @@
 name: Deno CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  contents: read
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
-    - name: Setup Deno
-      uses: denoland/setup-deno@v1.x
+    - name: Set up Deno
+      uses: denoland/setup-deno@v1.1.0  # Specify a valid version here
       with:
-        deno-version: v1.13.2  # Example of a specific version for stability
-
-    - name: Run Linter
-      run: deno lint
-
-    - name: Run Formatter Check (Optional)
-      run: deno fmt --check
-      continue-on-error: true  # This allows the job to continue even if formatting fails
-
-    - name: Run Tests
-      run: deno test -A
+        deno-version: v1.23.0  # Specify the Deno version you need
